@@ -25,7 +25,7 @@
 		}
 	}
 </script>
-<script src="js/jquery.js"></script>
+<script src="<%=path%>/js/jquery.js"></script>
 <script>
 	$(document).ready(function(c) {
 		$('.alert-close').on('click', function(c) {
@@ -41,28 +41,29 @@
 	<div class="message warning">
 		<div class="inset">
 			<div class="login-head">
-				<h1>欢迎登录考试系统</h1>
+				<h1>注册</h1>
 				<div class="alert-close"></div>
 			</div>
-			<form action="<%=path%>userServlet" method="get">
-				<input type="hidden" name="method" value="login">
-				<li><input name="username" type="text" class="text"
-					value="Username" onfocus="this.value = '';"
-					onblur="if (this.value == '') {this.value = 'Username';}"><a
-					href="#" class=" icon user"></a></li>
-				<div class="clear"></div>
-				<li><input name="password" type="password" value="Password"
-					onfocus="this.value = '';"
-					onblur="if (this.value == '') {this.value = 'Password';}">
-					<a href="#" class="icon lock"></a></li>
+			<form action="userServlet" method="get" id="form">
+				<input type="hidden" name="method" value="register">
+				<li><input name="username" type="text" class="text" placeholder="请输入用户名">
+					</li>
+				<li><input name="password" type="password" placeholder="密码">
+					</li>
+				<li><input name="name" type="text" placeholder="真实姓名">
+					</li>
+				<li><input name="telephone" type="text" placeholder="请输入电话">
+				</li>
+				<li><input name="sex" type="text" placeholder="请输入性别">
+					</li>
+				<li><input name="age" type="text" placeholder="请输入年龄">
+					</li>
+				<li><input name="role" type="text" placeholder="请输入角色"></li>
 				<div class="clear"></div>
 				<div class="submit">
-					<input type="submit" value="Sign in">
+					<input type="submit" value="Sign up" id="submit">
 					<h4>
-						<a href="#">忘记密码 ?</a>
-					</h4>
-					<h4>
-						<a href="<%=path%>register.jsp">注册 ?</a>
+						<a href="login.jsp" style="float: right">已有账户，前往登录</a>
 					</h4>
 					<br>
 					<br> <span style="color: red; font-size: 10px">${login_msg}</span>
@@ -72,14 +73,9 @@
 		</div>
 	</div>
 
-	<div class="clear"></div>
-	<!--- footer --->
-	<div class="footer">
-		<p>Made by xian</p>
-	</div>
 	<div style="display: none">
 		<script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540'
 			language='JavaScript' charset='gb2312'></script>
-	</div>
+	</div>342
 </body>
 </html>

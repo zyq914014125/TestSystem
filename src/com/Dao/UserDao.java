@@ -12,4 +12,6 @@ public interface UserDao {
     List<User> queryAllUsers();
     //添加用户
     void addUser(String username,String password,String name,String telephone,String sex,String age,String role);
+
+    void insert(User user);
 }

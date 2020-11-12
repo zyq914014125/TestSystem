@@ -51,7 +51,7 @@ public class QuestionController extends HttpServlet {
         req.setAttribute("singleList", singles);
         //转发至卷子界面
 //        req.getRequestDispatcher("WEB-INF/exam/paper.jsp").forward(req, resp);
-        req.getRequestDispatcher("WEB-INF/exam/paper.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/exam/exam1.jsp").forward(req, resp);
     }
     //获取提交试卷，并计算分数
     private void submitPaper(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -62,7 +62,6 @@ public class QuestionController extends HttpServlet {
         for (single single : singles) {
             rightAnswers.add(single.getAnswer());//往rightAnswers集合添加每一个正确得答案
         }
-
         Enumeration<String> parameterNames = req.getParameterNames();//获取请求所有的参数名
         int rightCount = 0;											//正确的题目数
         List<String> yourAnswers = new ArrayList<String>();			//你的答案集合
@@ -70,7 +69,6 @@ public class QuestionController extends HttpServlet {
             String pName = parameterNames.nextElement();			//获取下一个枚举元素，作为参数名
             String yourAnswer = req.getParameter(pName);			//当前枚举元素所对应的参数值
             System.out.println(pName + " : " + yourAnswer);
-
             if (pName.startsWith("answer")) {						//如果当前参数名以answer开头，即单选框
                 int index =  Integer.parseInt(pName.substring(6));	//通过字符串截取，把参数名所对应的下标截取出来
                 String rightAnswer = rightAnswers.get(index);		//通过下标，访问正确答案集合，获取所对应题的正确答案
@@ -80,15 +78,12 @@ public class QuestionController extends HttpServlet {
                 yourAnswers.add(yourAnswer);						//把你的答案添加到你的答案集合中
             }
         }
-
         int score = rightCount * (100/rightAnswers.size());			//分数=正确数目 * 每道题的分值占比
-
         //向页面返回数据
         req.setAttribute("yourAnswers", yourAnswers);
         req.setAttribute("rightAnswers", rightAnswers);
         req.setAttribute("rightCount", rightCount);
         req.setAttribute("score", score);
-
         //获取登录用户的session ,并把成绩打入库中
         User user = (User)req.getSession().getAttribute("user");
         Grade grade = new Grade();
@@ -104,6 +99,6 @@ public class QuestionController extends HttpServlet {
         List<String> papers =  questionService.queryPaperList();
         System.out.println(papers);
         req.setAttribute("paperList", papers);
-        req.getRequestDispatcher("WEB-INF/exam/selectPaper.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/exam/selectPaper2.jsp").forward(req, resp);
     }
 }

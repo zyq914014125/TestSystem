@@ -39,4 +39,10 @@ template.query（sql语句，对应的Entity对象)
         String sql = "insert into user values(null,?,?,?,?,?,?,?)";
         template.update(sql,username,password,name,telephone,sex,age,role);
     }
+
+    @Override
+    public void insert(User user) {
+        String sql="INSERT into user(username,password,name,telephone,sex,age,role ) VALUES(?,?,?,?,?,?,?);";
+        template.update(sql,user.getUsername(),user.getPassword(),user.getName(),user.getTelephone(),user.getSex(),user.getAge(),user.getRole());
+    }
 }

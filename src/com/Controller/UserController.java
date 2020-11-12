@@ -22,7 +22,26 @@ public class UserController extends HttpServlet {
         String method = request.getParameter("method");
         if(method.equals("login"))
             login(request,response);
+        if(method.equals("register"))
+            register(request,response);
+
     }
+
+    private void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user=new User();
+        user.setUsername(request.getParameter("username"));
+        user.setPassword(request.getParameter("password"));
+        user.setName(request.getParameter("name"));
+        user.setAge(Integer.parseInt(request.getParameter("age")));
+        user.setSex(request.getParameter("sex"));
+        user.setRole(request.getParameter("role"));
+        user.setTelephone(request.getParameter("telephone"));
+        //调用服务
+        userService.insert(user);
+        //跳转界面
+        request.getRequestDispatcher("login.jsp").forward(request, response);
+    }
+
     public void login(HttpServletRequest request,HttpServletResponse response)throws ServletException, IOException{
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -39,7 +58,7 @@ public class UserController extends HttpServlet {
         else {
             System.out.println("登陆失败，请检查用户名或密码是否正确");
             request.setAttribute("login_msg", "登陆失败，请检查用户名或密码是否正确");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         }
     }
 

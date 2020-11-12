@@ -13,4 +13,7 @@ public class UserService {
         return userDao.queryUser(username,password);
     }
 
+    public void insert(User user) {
+         userDao.insert(user);
+    }
 }
